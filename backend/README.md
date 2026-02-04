@@ -1,10 +1,10 @@
 # TaskWise IA Backend
 
-Backend inicial para **TaskWise IA** usando FastAPI + MongoDB (Motor async).
+Backend para **TaskWise IA** usando FastAPI + MongoDB (Motor async) con autenticación JWT.
 
 ## Requisitos
 - Python 3.10+
-- MongoDB en ejecución
+- MongoDB en ejecución (local)
 
 ## Configuración
 1. Copia el archivo de variables de entorno:
@@ -12,6 +12,16 @@ Backend inicial para **TaskWise IA** usando FastAPI + MongoDB (Motor async).
    cp .env.example .env
    ```
 2. Ajusta los valores según tu entorno.
+
+Variables principales:
+- `MONGO_URI` (por defecto `mongodb://localhost:27017`)
+- `MONGO_DB` (por defecto `taskwise`)
+- `JWT_SECRET`
+- `JWT_EXPIRE_MINUTES`
+- `AI_ENABLED` (true/false)
+- `AI_API_KEY` (opcional)
+- `AI_BASE_URL` (opcional)
+- `AI_MODEL` (opcional)
 
 ## Instalación
 ```bash
@@ -22,10 +32,15 @@ pip install -r requirements.txt
 
 ## Ejecución
 ```bash
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
 ```
 
-## Endpoints iniciales
+## Tests
+```bash
+pytest
+```
+
+## Endpoints
 - `POST /auth/register`
 - `POST /auth/login`
 - `GET /tasks`
