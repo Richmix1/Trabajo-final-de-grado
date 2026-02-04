@@ -64,7 +64,7 @@ async def update_task(
     if not task:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Task not found")
 
-    update_data = payload.dict(exclude_unset=True)
+    update_data = payload.model_dump(exclude_unset=True)
     if update_data:
         await db.tasks.update_one(
             {"_id": task_id, "user_id": current_user["_id"]},
